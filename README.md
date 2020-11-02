@@ -22,7 +22,11 @@ If on of the table is mid size table then while joining we cannot use broacast j
 Let's say some key is getting repeated across the dataset i.e key is not distributed uniformly .So in this case we add some prefix or some suffix to original key to make it distributed across other partitions
 
 
-1)Below is the issue coming while spark job:
+2)Below is the issue coming while spark job:
+For heavy workloads it is recommended to increase spark.network.timeout to 800 seconds:
+
+--conf spark.network.timeout=800
+
 Kindly try Increasing spark.rpc.askTimeout from default 120 seconds to a higher value in Ambari UI -> Spark Configs -> spark2-defaults. Recommendation is to increase it to at least 480 seconds and restart the necessary services.possibly the Driver and Executer are not able to  get Heartbeat response in configured timeout. If you don’t want to do any cluster level change then you may try overriding this value in the job level.
 
  

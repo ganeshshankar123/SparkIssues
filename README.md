@@ -29,7 +29,30 @@ For heavy workloads it is recommended to increase spark.network.timeout to 800 s
 
 Kindly try Increasing spark.rpc.askTimeout from default 120 seconds to a higher value in Ambari UI -> Spark Configs -> spark2-defaults. Recommendation is to increase it to at least 480 seconds and restart the necessary services.possibly the Driver and Executer are not able to  get Heartbeat response in configured timeout. If you don’t want to do any cluster level change then you may try overriding this value in the job level.
 
- 
+ '=Few fundamentals about Hive Part 1:-
+1. you can check the hive default configs under the file hive-site.xml.The location is /etc/hive/conf , you can see this file here.
+
+2. when you are in hive command line you can type : set;
+with this we will get a bunch of default properties to see on the screen, if we want we can overwrite these properties using the command
+set propertyname = value;
+
+3. The above properties that we set using the set command are valid only for that session. if you want to specify the properties permanently then we need to create a file .hiverc under the home directory.
+cd ~
+gedit .hiverc
+in this file now mention the above properties.
+now once we login to give we can see these properties are applied.
+
+4. logging level for hive can be changed by editing the file hive-log4j.properties.This is found under the path /etc/hive/conf.
+
+5. Also the log files can be found under /tmp/<username>
+As we are logging in with the user cloudera,so the log files are present in /tmp/cloudera.we can see log files under this.
+
+6. In hive type: set fs.defaultFS;
+this will tell to which hdfs your hive will talk to
+for cloudera it will show:
+fs.defaultFS=hdfs://quickstart.cloudera:8020
+
+
 
 For example:  spark-submit by adding --conf spark.rpc.askTimeout=600s while submitting the job
 org.apache.spark.rpc.RpcTimeoutException: Cannot receive any reply in 120 seconds. This timeout is controlled by spark.rpc.askTimeout

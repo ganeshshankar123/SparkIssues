@@ -99,3 +99,31 @@ org.apache.spark.rpc.RpcTimeoutException: Cannot receive any reply in 120 second
 	at java.lang.Thread.run(Thread.java:745)
 Caused by: java.util.concurrent.TimeoutException: Cannot receive any reply in 120 seconds
 	... 8 more
+
+
+
+Checkpointing ,State Store and Watermark in Structured Streaming
+============================================
+
+CHECKPOINTING
+
+Checkpoint dir is a physical location which serves 2 purposes:-
+1)Stores the current state of application (eg :-lets say in file streaming application 3 of 5 files have been processed)
+2)Aggregated values (eg- the state of running total in streaming application)
+
+Checkpointing is purposed to recover the state in case of streaming application failure hence provides fault tolerance.
+
+
+STATE STORE
+
+=> In case of Spark streaming application the state of aggregation is stored in state store(in executors).
+=>The same state is also maintained by checkpoint dir.
+=>For the fast look up application refers to the State store (which in is memory) but not check point dir(which stores in disk)
+=>If the state store in not cleaned on regular basis we may experience a out of memory exception.
+
+WATERMARKS
+
+=>Watermarks comes to our rescue in order to clean the state store
+=>It is way to treat the late arriving records in spark streaming application by imposing some expiry date.
+=> we can define a specific time after which the late arriving records will not be considered to be stored and window prior to that
+will be removed from state store.

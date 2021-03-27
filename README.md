@@ -1,5 +1,12 @@
 # SparkIssues
 
+spark.sql.shuffle.partition=5
+Importance of above property
+By default Spark creates 200 partitions over a table which might  not even be required. By setting shuffle partitions configuration to, say 5, you are asking it to set the number of table partitions to that value. 
+
+Now this can obviously be explicitly changed by coalition or repartitioning. What AQE provides is an advantage here.
+
+When AQE is enabled, spark decides the post-shuffle partition size and number automatically based on the tables involved in the shuffle and broadcast exchange.
 Data Skewness:-
 Let's say some key is getting repeated across the dataset i.e key is not distributed uniformly 
 

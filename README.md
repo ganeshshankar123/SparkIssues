@@ -1,3 +1,10 @@
+**#HiveIssues**
+Connection timeout issue from hive beeline:
+1)Checked the hive server2 log and came to know there was error saying failed to connect hive metastore 
+2)then check hive metastore log and found that there is deadlock error at mysql 
+exception is : txn.TxnHandler deadlock detected in acquireLock(Initiator)
+https://community.cloudera.com/t5/Support-Questions/Hive-Metastore-Lock-wait-timeout-exceeded/td-p/161774
+
 # SparkIssues
 
 spark.sql.shuffle.partition=5

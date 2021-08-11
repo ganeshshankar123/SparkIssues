@@ -1,6 +1,6 @@
 **#HiveIssues**
 
-Connection timeout issue from hive beeline:
+**Connection timeout issue from hive beeline:**
 
 1)Checked the hive server2 log and came to know there was error saying failed to connect hive metastore 
 
@@ -10,6 +10,17 @@ exception is : txn.TxnHandler deadlock detected in acquireLock(Initiator)
 
 Refernce:
 https://community.cloudera.com/t5/Support-Questions/Hive-Metastore-Lock-wait-timeout-exceeded/td-p/161774
+
+**Getting Null pointer issue while running query from hive beeline**
+1)After searching what we found that hive maintains its cache and found that hive cache is corrupted.
+
+2)Resolution is to set the hive property as 
+
+hive.query.results.cache.enabled=false
+
+The above issue is also bug.Below is the url:
+
+http://mail-archives.apache.org/mod_mbox/hive-issues/201910.mbox/%3CJIRA.13263860.1571769590000.20563.1571769960025@Atlassian.JIRA%3E
 
 # SparkIssues
 

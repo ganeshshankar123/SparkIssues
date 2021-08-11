@@ -12,6 +12,7 @@ Refernce:
 https://community.cloudera.com/t5/Support-Questions/Hive-Metastore-Lock-wait-timeout-exceeded/td-p/161774
 
 **Getting Null pointer issue while running query from hive beeline**
+
 1)After searching what we found that hive maintains its cache and found that hive cache is corrupted.
 
 2)Resolution is to set the hive property as 

@@ -12,7 +12,36 @@ Refernce:
 https://community.cloudera.com/t5/Support-Questions/Hive-Metastore-Lock-wait-timeout-exceeded/td-p/161774
 
 **Getting Null pointer issue while running query from hive beeline**
-
+org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: NullPointerException null
+	at org.apache.hive.jdbc.Utils.verifySuccess(Utils.java:300)
+	at org.apache.hive.jdbc.Utils.verifySuccessWithInfo(Utils.java:286)
+	at org.apache.hive.jdbc.HiveStatement.runAsyncOnServer(HiveStatement.java:324)
+	at org.apache.hive.jdbc.HiveStatement.execute(HiveStatement.java:265)
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)
+	at org.apache.commons.dbcp2.DelegatingStatement.execute(DelegatingStatement.java:291)
+	at org.apache.zeppelin.jdbc.JDBCInterpreter.executeSql(JDBCInterpreter.java:718)
+	at org.apache.zeppelin.jdbc.JDBCInterpreter.interpret(JDBCInterpreter.java:801)
+	at org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:103)
+	at org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:633)
+	at org.apache.zeppelin.scheduler.Job.run(Job.java:188)
+	at org.apache.zeppelin.scheduler.ParallelScheduler$JobRunner.run(ParallelScheduler.java:162)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.apache.hive.service.cli.HiveSQLException: Error while compiling statement: FAILED: NullPointerException null
+	at org.apache.hive.service.cli.operation.Operation.toSQLException(Operation.java:348)
+	at org.apache.hive.service.cli.operation.SQLOperation.prepare(SQLOperation.java:199)
+	at org.apache.hive.service.cli.operation.SQLOperation.runInternal(SQLOperation.java:262)
+	at org.apache.hive.service.cli.operation.Operation.run(Operation.java:260)
+	at org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementInternal(HiveSessionImpl.java:575)
+	at org.apache.hive.service.cli.session.HiveSessionImpl.executeStatementAsync(HiveSessionImpl.java:561)
+	at org.apache.hive.service.cli.CLIService.executeStatementAsync(CLIService.java:315)
+	at org.apache.hive.service.cli.thrift.ThriftCLIService.ExecuteStatement(ThriftCLIService.java:566)
+	
 1)After searching what we found that hive maintains its cache and found that hive cache is corrupted.
 
 2)Resolution is to set the hive property as 

@@ -52,6 +52,8 @@ The above issue is also bug.Below is the url:
 
 http://mail-archives.apache.org/mod_mbox/hive-issues/201910.mbox/%3CJIRA.13263860.1571769590000.20563.1571769960025@Atlassian.JIRA%3E
 
+b) In metastore log,it is showing Host is blocked because of many connections error
+Resolution:Run -p flush-hosts command in mysql and increase no of max connections.
 # SparkIssues
 
 spark.sql.shuffle.partition=5
